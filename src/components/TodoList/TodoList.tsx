@@ -7,7 +7,7 @@ const TodoList = () => {
   const [task, setTask] = useState<string>("")
   const [tasks, setTasks] = useState<TasksType[]>([])
   const [done, setDone] = useState<boolean>(false)
-  const inputRef = useRef<any>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     inputRef.current?.focus()
