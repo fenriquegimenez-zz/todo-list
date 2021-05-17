@@ -41,10 +41,10 @@ const TodoList = () => {
         <ul className="list-group">
           {tasks.map((task: TasksType) => {
             return (
-              <li
-                className="list-group-item"
-                key={task.id}
-              >{`${task.id} - ${task.name}`}</li>
+              <li className="list-group-item" key={task.id}>
+                <input type="checkbox" className="form-check-input me-2" />
+                {task.name}
+              </li>
             )
           })}
         </ul>
