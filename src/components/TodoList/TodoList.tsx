@@ -1,12 +1,12 @@
 import React, { FormEvent, useState, useEffect, useRef } from "react"
 import { TasksType } from "../../types/types"
 import clsx from "clsx"
+import { isTargetLikeServerless } from "next/dist/next-server/server/config"
 
 const TodoList = () => {
   const [task, setTask] = useState<string>("")
   const [tasks, setTasks] = useState<TasksType[]>([])
   const [done, setDone] = useState<boolean>(false)
-  const [id, setId] = useState(1)
   const inputRef = useRef<any>(null)
 
   useEffect(() => {
@@ -14,18 +14,22 @@ const TodoList = () => {
   }, [task])
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    addTask(task)
+    addTasks(task)
     setTask("")
   }
-  const addTask = (name: string) => {
-    if (!name) return
-    setId(prevId => prevId + 1)
-    const newTasks: TasksType[] = [...tasks, { name, done, id }]
+  const addTasks = (todoName: string): void => {
+    if (!todoName) return
+    const newTasks: TasksType[] = [...tasks, { todoName, done }]
     setTasks(newTasks)
   }
-  const toggleDoneTask = (id: number) => {
+  const toggleDoneTask = (id: number): void => {
     const newTasks: TasksType[] = [...tasks]
     newTasks[id].done = !newTasks[id].done
+    setTasks(newTasks)
+  }
+  const removeTask = (id: number): void => {
+    const newTasks: TasksType[] = [...tasks]
+    newTasks.splice(id, 1)
     setTasks(newTasks)
   }
   return (
@@ -48,7 +52,7 @@ const TodoList = () => {
       </form>
       <div className="my-3">
         <ul className="list-group">
-          {tasks.map((task: TasksType) => {
+          {tasks.map((task: TasksType, id: number) => {
             const style = clsx({
               btn: true,
               "btn-success": !task.done,
@@ -59,20 +63,25 @@ const TodoList = () => {
               "list-group-item-secondary": task.done,
             })
             return (
-              <li className={liStyle} key={task.id}>
+              <li className={liStyle} key={id}>
                 <p
                   style={{
                     textDecorationLine: task.done ? "line-through" : "",
                   }}
                 >
-                  {task.name}
+                  {task.todoName}
                 </p>
-                <button
-                  onClick={() => toggleDoneTask(task.id - 1)}
-                  className={style}
-                >
-                  {!task.done ? "✓" : "✗"}
-                </button>
+                <div className="d-flex flex-row-reverse">
+                  <button
+                    onClick={() => removeTask(id)}
+                    className="btn btn-outline-danger mx-2"
+                  >
+                    🗑
+                  </button>
+                  <button onClick={() => toggleDoneTask(id)} className={style}>
+                    {!task.done ? "✓" : "✗"}
+                  </button>
+                </div>
               </li>
             )
           })}

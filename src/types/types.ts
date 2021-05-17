@@ -1,5 +1,4 @@
 export interface TasksType {
-  name: string
-  id: number
+  todoName: string
   done: boolean
 }
