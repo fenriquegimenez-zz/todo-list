@@ -1,7 +1,6 @@
 import React, { FormEvent, useState, useEffect, useRef } from "react"
 import { TasksType } from "../../types/types"
 import clsx from "clsx"
-import { isTargetLikeServerless } from "next/dist/next-server/server/config"
 
 const TodoList = () => {
   const [task, setTask] = useState<string>("")
