@@ -3,9 +3,9 @@ import Link from "next/link"
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-start">
       <Link href="/">
-        <a className="navbar-brand">Todo List</a>
+        <a className="navbar-brand">Lista de tareas</a>
       </Link>
     </nav>
   )

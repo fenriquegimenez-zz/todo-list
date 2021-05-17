@@ -9,7 +9,6 @@ type LayoutProps = {
 const AppLayout = ({ children }: LayoutProps) => {
   return (
     <div className="container">
-      <Navbar />
       {children}
       <Footer />
     </div>
