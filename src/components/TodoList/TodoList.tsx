@@ -37,11 +37,18 @@ const TodoList = () => {
           </div>
         </div>
       </form>
-      <ul>
-        {tasks.map((task: TasksType) => {
-          return <li key={task.id}>{`${task.id} - ${task.name}`}</li>
-        })}
-      </ul>
+      <div className="my-3">
+        <ul className="list-group">
+          {tasks.map((task: TasksType) => {
+            return (
+              <li
+                className="list-group-item"
+                key={task.id}
+              >{`${task.id} - ${task.name}`}</li>
+            )
+          })}
+        </ul>
+      </div>
     </>
   )
 }
