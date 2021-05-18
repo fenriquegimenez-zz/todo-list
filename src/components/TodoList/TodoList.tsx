@@ -45,7 +45,7 @@ const TodoList = () => {
             placeholder="Agregue una tarea"
           />
           <div className="input-group-prepend">
-            <button className="btn btn-success">Crear</button>
+            <button className="btn btn-success mx-3">Crear</button>
           </div>
         </div>
       </form>
